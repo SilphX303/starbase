@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+@theme {
+	/* LCARS-inspired palette (original, non-trademarked) */
+	--color-space: #0a0a0f;
+	--color-panel: #14141c;
+	--color-panel-2: #1c1c28;
+	--color-amber: #f5a623;
+	--color-orange: #e8772e;
+	--color-lavender: #b8a6e8;
+	--color-mauve: #8e7cc3;
+	--color-salmon: #e88c7d;
+	--color-teal: #5ec8c0;
+	--color-glow: #f0e7d8;
+	--color-dim: #7a7a8c;
+	--color-alert: #e84c4c;
+
+	--font-display: 'Antonio', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+	--radius-lcars: 1.75rem;
+}
+
+@layer base {
+	html {
+		background-color: var(--color-space);
+		color: var(--color-glow);
+		font-family: var(--font-display);
+		letter-spacing: 0.02em;
+	}
+}
+
+@layer components {
+	/* Rounded LCARS panel block */
+	.lcars-panel {
+		background-color: var(--color-panel);
+		border-radius: var(--radius-lcars);
+		overflow: hidden;
+	}
+
+	/* Elbow-shaped sidebar cap */
+	.lcars-elbow-top {
+		border-top-left-radius: var(--radius-lcars);
+		border-bottom-left-radius: 0;
+	}
+	.lcars-elbow-bottom {
+		border-bottom-left-radius: var(--radius-lcars);
+	}
+
+	.lcars-pill {
+		border-radius: 9999px;
+	}
+
+	.lcars-label {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--color-dim);
+	}
+}
