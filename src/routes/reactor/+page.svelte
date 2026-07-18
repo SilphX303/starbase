@@ -38,8 +38,8 @@
 <header class="lcars-panel overflow-hidden mb-4">
 	<div class="bg-orange text-space px-5 py-4 flex items-baseline justify-between gap-3 flex-wrap">
 		<div>
-			<h1 class="font-bold text-xl tracking-widest">REACTOR CORE</h1>
-			<p class="text-xs tracking-wider opacity-80 uppercase">Fuel intake log</p>
+			<h1 class="font-bold text-xl tracking-[0.16em]">REACTOR CORE</h1>
+			<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">Fuel intake log <span class="lcars-code text-space/60 ml-1">SBS 02-2261</span></p>
 		</div>
 		<div class="flex items-center gap-2 text-sm font-bold">
 			<a href="/reactor?d={shiftDay(-1)}" class="px-3 py-1 rounded-full bg-space/20 hover:bg-space/40">←</a>
@@ -51,7 +51,7 @@
 	</div>
 	<div class="p-5">
 		<div class="flex items-baseline justify-between flex-wrap gap-2">
-			<p class="font-mono text-3xl tabular-nums">
+			<p class="lcars-readout text-3xl">
 				{data.totals.kcal}<span class="text-dim text-base"> / {data.settings.calorieFloor}–{data.settings.calorieTarget} kcal</span>
 			</p>
 			<p class="lcars-label">
@@ -61,9 +61,9 @@
 				{:else}Above operating band{/if}
 			</p>
 		</div>
-		<div class="mt-3 h-3 rounded-full bg-panel-2 overflow-hidden relative">
+		<div class="mt-3 bar-track h-3 relative">
 			<div
-				class="h-full rounded-full {inBand ? 'bg-teal' : 'bg-amber'}"
+				class="bar-fill {inBand ? 'bg-teal' : 'bg-amber'}"
 				style="width: {bandPct}%"
 			></div>
 			<div
@@ -110,8 +110,8 @@
 				<form method="POST" action="?/quickAdd" use:enhance class="flex gap-2 mb-3 flex-wrap">
 					<input type="hidden" name="meal" value={meal.key} />
 					<input type="hidden" name="d" value={data.d} />
-					<input name="name" placeholder="Name (optional)" class="bg-panel-2 rounded-xl px-3 py-2 text-sm flex-1 min-w-32 outline-none focus:ring-2 focus:ring-orange" />
-					<input name="kcal" type="number" min="1" max="5000" required placeholder="kcal" class="bg-panel-2 rounded-xl px-3 py-2 text-sm w-24 outline-none focus:ring-2 focus:ring-orange" />
+					<input name="name" placeholder="Name (optional)" class="lcars-input px-3 py-2 text-sm flex-1 min-w-32 outline-none focus:ring-2 focus:ring-orange" />
+					<input name="kcal" type="number" min="1" max="5000" required placeholder="kcal" class="lcars-input px-3 py-2 text-sm w-24 outline-none focus:ring-2 focus:ring-orange" />
 					<button type="submit" class="lcars-pill bg-orange text-space text-sm font-bold px-4 cursor-pointer">Add</button>
 				</form>
 			{/if}

@@ -29,9 +29,12 @@
 	<title>Starbase — Replicator</title>
 </svelte:head>
 
-<header class="lcars-panel bg-mauve text-space px-5 py-4 mb-4">
-	<h1 class="font-bold text-xl tracking-widest">REPLICATOR DATABASE</h1>
-	<p class="text-xs tracking-wider opacity-80 uppercase">Curated meal patterns · one-tap logging</p>
+<header class="lcars-panel bg-mauve text-space px-5 py-4 mb-4 flex flex-wrap items-end justify-between gap-2">
+	<div>
+		<h1 class="font-bold text-xl tracking-[0.16em]">REPLICATOR DATABASE</h1>
+		<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">Curated meal patterns · one-tap logging</p>
+	</div>
+	<span class="lcars-code text-space/60">SBS 06-2261 · PATTERN LIBRARY</span>
 </header>
 
 <section class="lcars-panel p-4 mb-4">

@@ -78,9 +78,12 @@
 	<title>Starbase — Barcode scan</title>
 </svelte:head>
 
-<header class="lcars-panel bg-lavender text-space px-5 py-4 mb-4">
-	<h1 class="font-bold text-xl tracking-widest">TRICORDER SCAN</h1>
-	<p class="text-xs tracking-wider opacity-80 uppercase">{meal} · point at a barcode</p>
+<header class="lcars-panel bg-lavender text-space px-5 py-4 mb-4 flex flex-wrap items-end justify-between gap-2">
+	<div>
+		<h1 class="font-bold text-xl tracking-[0.16em]">TRICORDER SCAN</h1>
+		<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">{meal} · point at a barcode</p>
+	</div>
+	<span class="lcars-code text-space/60">SBS 02-2261 · SENSOR</span>
 </header>
 
 <div class="lcars-panel overflow-hidden relative">

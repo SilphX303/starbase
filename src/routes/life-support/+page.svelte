@@ -13,9 +13,12 @@
 	<title>Starbase — Life Support</title>
 </svelte:head>
 
-<header class="lcars-panel bg-teal text-space px-5 py-4 mb-4">
-	<h1 class="font-bold text-xl tracking-widest">LIFE SUPPORT</h1>
-	<p class="text-xs tracking-wider opacity-80 uppercase">Habits & recovery · {doneCount}/{data.habits.length} systems green today</p>
+<header class="lcars-panel bg-teal text-space px-5 py-4 mb-4 flex flex-wrap items-end justify-between gap-2">
+	<div>
+		<h1 class="font-bold text-xl tracking-[0.16em]">LIFE SUPPORT</h1>
+		<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">Habits & recovery · {doneCount}/{data.habits.length} systems green today</p>
+	</div>
+	<span class="lcars-code text-space/60">SBS 05-2261 · ENV CONTROL</span>
 </header>
 
 {#if form?.error}<p class="text-alert text-sm mb-3">{form.error}</p>{/if}
@@ -81,11 +84,11 @@
 		<form method="POST" action="?/add" use:enhance class="mt-3 flex gap-2 flex-wrap items-end">
 			<label class="flex flex-col gap-1">
 				<span class="lcars-label">Icon (optional)</span>
-				<input name="icon" maxlength="4" class="bg-panel-2 rounded-xl px-3 py-2 w-16 text-center outline-none focus:ring-2 focus:ring-teal" />
+				<input name="icon" maxlength="4" class="lcars-input px-3 py-2 w-16 text-center outline-none focus:ring-2 focus:ring-teal" />
 			</label>
 			<label class="flex flex-col gap-1 flex-1 min-w-48">
 				<span class="lcars-label">New habit</span>
-				<input name="name" required maxlength="80" placeholder="e.g. No sugary drinks" class="bg-panel-2 rounded-xl px-3 py-2 outline-none focus:ring-2 focus:ring-teal" />
+				<input name="name" required maxlength="80" placeholder="e.g. No sugary drinks" class="lcars-input px-3 py-2 outline-none focus:ring-2 focus:ring-teal" />
 			</label>
 			<button type="submit" class="lcars-pill bg-teal text-space font-bold text-sm px-4 py-2 hover:bg-amber transition-colors cursor-pointer">Add</button>
 		</form>

@@ -12,9 +12,12 @@
 </svelte:head>
 
 <div class="lcars-panel overflow-hidden">
-	<div class="{color} text-space px-5 py-4">
-		<h1 class="font-bold text-xl tracking-widest uppercase">{title}</h1>
-		<p class="text-xs tracking-wider opacity-80 uppercase">{domain}</p>
+	<div class="{color} text-space px-5 py-4 flex flex-wrap items-end justify-between gap-2">
+		<div>
+			<h1 class="font-bold text-xl tracking-[0.16em] uppercase">{title}</h1>
+			<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">{domain}</p>
+		</div>
+		<span class="lcars-code text-space/60">SBS 00-2261 · REFIT</span>
 	</div>
 	<div class="p-6">
 		<p class="lcars-label mb-2">Station status</p>

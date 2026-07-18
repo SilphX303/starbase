@@ -29,6 +29,8 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
+		"@fontsource/antonio": "^5.2.8",
+		"@fontsource/jetbrains-mono": "^5.2.8",
 		"argon2": "^0.44.0",
 		"barcode-detector": "^3.2.1",
 		"better-sqlite3": "^12.11.1",

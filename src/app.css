@@ -1,24 +1,35 @@
 @import 'tailwindcss';
 
 @theme {
-	/* LCARS-inspired palette (original, non-trademarked) */
-	--color-space: #0a0a0f;
-	--color-panel: #14141c;
-	--color-panel-2: #1c1c28;
-	--color-amber: #f5a623;
-	--color-orange: #e8772e;
-	--color-lavender: #b8a6e8;
-	--color-mauve: #8e7cc3;
-	--color-salmon: #e88c7d;
-	--color-teal: #5ec8c0;
-	--color-glow: #f0e7d8;
-	--color-dim: #7a7a8c;
-	--color-alert: #e84c4c;
+	/*
+	 * LCARS-inspired palette (original, non-trademarked).
+	 * Golden-orange ambers, dusty violets, warm neutrals on deep space.
+	 * Token NAMES are stable API — other files reference them.
+	 */
+	--color-space: #05060c;
+	--color-panel: #12131d;
+	--color-panel-2: #1e1f2e;
+	--color-amber: #f7b23e;
+	--color-orange: #ee7f2f;
+	--color-lavender: #c3b1f0;
+	--color-mauve: #9d8ccc;
+	--color-salmon: #ef8e77;
+	--color-teal: #63c9c0;
+	--color-glow: #f4ecdc;
+	--color-dim: #9d99b4;
+	--color-alert: #f2554e;
+
+	/* New tokens (additive) */
+	--color-butter: #e8c98d; /* pale butterscotch — secondary rail accent */
+	--color-rail: #2b2c40; /* inert structural rail segment */
 
 	--font-display: 'Antonio', 'Arial Narrow', 'Avenir Next Condensed', sans-serif;
 	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-	--radius-lcars: 1.75rem;
+	--radius-lcars: 1.5rem;
+	--radius-elbow: 2.5rem;
+
+	--tracking-lcars: 0.14em;
 }
 
 @layer base {
@@ -26,7 +37,28 @@
 		background-color: var(--color-space);
 		color: var(--color-glow);
 		font-family: var(--font-display);
-		letter-spacing: 0.02em;
+		letter-spacing: 0.025em;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	::selection {
+		background-color: var(--color-amber);
+		color: var(--color-space);
+	}
+
+	input,
+	select {
+		color-scheme: dark;
+	}
+
+	input::placeholder {
+		color: color-mix(in srgb, var(--color-dim) 75%, transparent);
+	}
+
+	h1,
+	h2,
+	h3 {
+		letter-spacing: var(--tracking-lcars);
 	}
 }
 
@@ -36,25 +68,144 @@
 		background-color: var(--color-panel);
 		border-radius: var(--radius-lcars);
 		overflow: hidden;
+		animation: lcars-in 220ms ease-out both;
 	}
 
-	/* Elbow-shaped sidebar cap */
+	/* Elbow-shaped caps (legacy helpers, kept for compatibility) */
 	.lcars-elbow-top {
-		border-top-left-radius: var(--radius-lcars);
+		border-top-left-radius: var(--radius-elbow);
 		border-bottom-left-radius: 0;
 	}
 	.lcars-elbow-bottom {
-		border-bottom-left-radius: var(--radius-lcars);
+		border-bottom-left-radius: var(--radius-elbow);
 	}
 
 	.lcars-pill {
 		border-radius: 9999px;
 	}
 
+	/* Interactive pills get a fast hover glow */
+	a.lcars-pill,
+	button.lcars-pill {
+		transition:
+			filter 150ms ease,
+			box-shadow 150ms ease,
+			background-color 150ms ease,
+			color 150ms ease;
+	}
+	a.lcars-pill:hover,
+	button.lcars-pill:hover {
+		filter: brightness(1.1);
+		box-shadow: 0 0 14px color-mix(in srgb, var(--color-amber) 22%, transparent);
+	}
+
+	/* Small-caps section label */
 	.lcars-label {
-		font-size: 0.7rem;
+		font-size: 0.68rem;
 		text-transform: uppercase;
 		letter-spacing: 0.2em;
 		color: var(--color-dim);
+	}
+
+	/* Decorative alphanumeric register codes ("SBS 03-2261") */
+	.lcars-code {
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		font-variant-numeric: tabular-nums;
+		color: var(--color-dim);
+		white-space: nowrap;
+	}
+
+	/* Form controls — one voice for every input/select */
+	.lcars-input {
+		background-color: var(--color-panel-2);
+		border-radius: 0.9rem;
+		border: 1px solid color-mix(in srgb, var(--color-dim) 18%, transparent);
+		color: var(--color-glow);
+		font-variant-numeric: tabular-nums;
+		transition: border-color 150ms ease;
+	}
+	.lcars-input:hover {
+		border-color: color-mix(in srgb, var(--color-dim) 40%, transparent);
+	}
+
+	/* Numeric readout */
+	.lcars-readout {
+		font-family: var(--font-mono);
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* Status bar track + animated fill */
+	.bar-track {
+		background-color: var(--color-panel-2);
+		border-radius: 9999px;
+		overflow: hidden;
+	}
+	.bar-fill {
+		height: 100%;
+		border-radius: 9999px;
+		transform-origin: left;
+		animation: bar-grow 280ms ease-out both;
+	}
+
+	/* Single allowed "alive" indicator */
+	.alive-dot {
+		width: 0.4rem;
+		height: 0.4rem;
+		border-radius: 9999px;
+		background-color: var(--color-teal);
+		animation: alive 2.4s ease-in-out infinite;
+	}
+
+	/* Thin horizontal divider bar with rounded end-caps */
+	.lcars-divider {
+		display: flex;
+		align-items: center;
+		gap: 0.375rem;
+		height: 0.375rem;
+	}
+	.lcars-divider > span {
+		display: block;
+		height: 100%;
+		border-radius: 9999px;
+	}
+}
+
+@keyframes lcars-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes bar-grow {
+	from {
+		transform: scaleX(0);
+	}
+}
+
+@keyframes alive {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.2;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
 	}
 }

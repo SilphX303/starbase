@@ -13,9 +13,12 @@
 	<title>Starbase — Propulsion</title>
 </svelte:head>
 
-<header class="lcars-panel bg-lavender text-space px-5 py-4 mb-4">
-	<h1 class="font-bold text-xl tracking-widest">PROPULSION</h1>
-	<p class="text-xs tracking-wider opacity-80 uppercase">Exercise & movement</p>
+<header class="lcars-panel bg-lavender text-space px-5 py-4 mb-4 flex flex-wrap items-end justify-between gap-2">
+	<div>
+		<h1 class="font-bold text-xl tracking-[0.16em]">PROPULSION</h1>
+		<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">Exercise & movement</p>
+	</div>
+	<span class="lcars-code text-space/60">SBS 04-2261 · DRIVE SYSTEMS</span>
 </header>
 
 {#if form?.error}<p class="text-alert text-sm mb-3">{form.error}</p>{/if}
@@ -25,11 +28,11 @@
 <section class="lcars-panel p-5 mb-4 flex flex-wrap gap-6">
 	<div>
 		<p class="lcars-label">Active minutes (7 days)</p>
-		<p class="font-mono text-3xl tabular-nums">{data.activeMinutes}<span class="text-dim text-base"> min</span></p>
+		<p class="lcars-readout text-3xl">{data.activeMinutes}<span class="text-dim text-base"> min</span></p>
 	</div>
 	<div>
 		<p class="lcars-label">Active days (7 days)</p>
-		<p class="font-mono text-3xl tabular-nums">{activeDays}<span class="text-dim text-base"> / 7</span></p>
+		<p class="lcars-readout text-3xl">{activeDays}<span class="text-dim text-base"> / 7</span></p>
 	</div>
 	<div class="flex-1 min-w-48">
 		<p class="lcars-label mb-1">Rest-day doctrine</p>
@@ -43,17 +46,17 @@
 	<form method="POST" action="?/logSession" use:enhance class="flex flex-wrap items-end gap-3">
 		<label class="flex flex-col gap-1">
 			<span class="lcars-label">Type</span>
-			<select name="type" class="bg-panel-2 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-lavender">
+			<select name="type" class="lcars-input px-4 py-3 outline-none focus:ring-2 focus:ring-lavender">
 				{#each TYPES as t (t)}<option value={t}>{t}</option>{/each}
 			</select>
 		</label>
 		<label class="flex flex-col gap-1">
 			<span class="lcars-label">Minutes</span>
-			<input name="durationMin" type="number" min="1" max="600" required class="bg-panel-2 rounded-xl px-4 py-3 w-24 font-mono outline-none focus:ring-2 focus:ring-lavender" />
+			<input name="durationMin" type="number" min="1" max="600" required class="lcars-input px-4 py-3 w-24 font-mono outline-none focus:ring-2 focus:ring-lavender" />
 		</label>
 		<label class="flex flex-col gap-1">
 			<span class="lcars-label">Intensity</span>
-			<select name="intensity" class="bg-panel-2 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-lavender">
+			<select name="intensity" class="lcars-input px-4 py-3 outline-none focus:ring-2 focus:ring-lavender">
 				<option value="low">low</option>
 				<option value="moderate" selected>moderate</option>
 				<option value="high">high</option>
@@ -61,11 +64,11 @@
 		</label>
 		<label class="flex flex-col gap-1">
 			<span class="lcars-label">kcal (optional)</span>
-			<input name="kcalEst" type="number" min="0" max="5000" class="bg-panel-2 rounded-xl px-4 py-3 w-24 font-mono outline-none focus:ring-2 focus:ring-lavender" />
+			<input name="kcalEst" type="number" min="0" max="5000" class="lcars-input px-4 py-3 w-24 font-mono outline-none focus:ring-2 focus:ring-lavender" />
 		</label>
 		<label class="flex flex-col gap-1">
 			<span class="lcars-label">Date</span>
-			<input name="d" type="date" value={data.today} max={data.today} class="bg-panel-2 rounded-xl px-4 py-3 font-mono outline-none focus:ring-2 focus:ring-lavender" />
+			<input name="d" type="date" value={data.today} max={data.today} class="lcars-input px-4 py-3 font-mono outline-none focus:ring-2 focus:ring-lavender" />
 		</label>
 		<button type="submit" class="lcars-pill bg-lavender text-space font-bold px-6 py-3 hover:bg-amber transition-colors cursor-pointer">Log</button>
 	</form>
@@ -78,11 +81,11 @@
 		<form method="POST" action="?/logSteps" use:enhance class="flex items-end gap-2">
 			<label class="flex flex-col gap-1">
 				<span class="lcars-label">Steps</span>
-				<input name="steps" type="number" min="0" max="200000" required class="bg-panel-2 rounded-xl px-3 py-2 w-28 font-mono text-sm outline-none focus:ring-2 focus:ring-lavender" />
+				<input name="steps" type="number" min="0" max="200000" required class="lcars-input px-3 py-2 w-28 font-mono text-sm outline-none focus:ring-2 focus:ring-lavender" />
 			</label>
 			<label class="flex flex-col gap-1">
 				<span class="lcars-label">Date</span>
-				<input name="d" type="date" value={data.today} max={data.today} class="bg-panel-2 rounded-xl px-3 py-2 font-mono text-sm outline-none focus:ring-2 focus:ring-lavender" />
+				<input name="d" type="date" value={data.today} max={data.today} class="lcars-input px-3 py-2 font-mono text-sm outline-none focus:ring-2 focus:ring-lavender" />
 			</label>
 			<button type="submit" class="lcars-pill bg-lavender text-space font-bold text-sm px-4 py-2 hover:bg-amber transition-colors cursor-pointer">Set</button>
 		</form>

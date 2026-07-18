@@ -22,9 +22,12 @@
 	<title>Starbase — Hull Integrity</title>
 </svelte:head>
 
-<header class="lcars-panel bg-salmon text-space px-5 py-4 mb-4">
-	<h1 class="font-bold text-xl tracking-widest">HULL INTEGRITY</h1>
-	<p class="text-xs tracking-wider opacity-80 uppercase">Body composition — trend over datapoint</p>
+<header class="lcars-panel bg-salmon text-space px-5 py-4 mb-4 flex flex-wrap items-end justify-between gap-2">
+	<div>
+		<h1 class="font-bold text-xl tracking-[0.16em]">HULL INTEGRITY</h1>
+		<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">Body composition — trend over datapoint</p>
+	</div>
+	<span class="lcars-code text-space/60">SBS 03-2261 · TELEMETRY</span>
 </header>
 
 {#if form?.error}<p class="text-alert text-sm mb-3">{form.error}</p>{/if}
@@ -38,7 +41,7 @@
 			<input type="hidden" name="type" value="weight" />
 			<label class="flex flex-col gap-1">
 				<span class="lcars-label">Weight (kg)</span>
-				<input name="value" type="number" step="0.1" min="30" max="350" required class="bg-panel-2 rounded-xl px-4 py-3 w-32 font-mono outline-none focus:ring-2 focus:ring-salmon" />
+				<input name="value" type="number" step="0.1" min="30" max="350" required class="lcars-input px-4 py-3 w-32 font-mono outline-none focus:ring-2 focus:ring-salmon" />
 			</label>
 			<button type="submit" class="lcars-pill bg-salmon text-space font-bold px-5 py-3 hover:bg-amber transition-colors cursor-pointer">Log</button>
 		</form>
@@ -46,7 +49,7 @@
 			<input type="hidden" name="type" value="waist" />
 			<label class="flex flex-col gap-1">
 				<span class="lcars-label">Waist (cm)</span>
-				<input name="value" type="number" step="0.1" min="40" max="250" required class="bg-panel-2 rounded-xl px-4 py-3 w-32 font-mono outline-none focus:ring-2 focus:ring-salmon" />
+				<input name="value" type="number" step="0.1" min="40" max="250" required class="lcars-input px-4 py-3 w-32 font-mono outline-none focus:ring-2 focus:ring-salmon" />
 			</label>
 			<button type="submit" class="lcars-pill bg-salmon text-space font-bold px-5 py-3 hover:bg-amber transition-colors cursor-pointer">Log</button>
 		</form>

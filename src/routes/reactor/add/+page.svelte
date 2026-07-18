@@ -78,9 +78,12 @@
 	<title>Starbase — Log fuel</title>
 </svelte:head>
 
-<header class="lcars-panel bg-orange text-space px-5 py-4 mb-4">
-	<h1 class="font-bold text-xl tracking-widest">LOG FUEL</h1>
-	<p class="text-xs tracking-wider opacity-80 uppercase">{data.meal} · {data.d}</p>
+<header class="lcars-panel bg-orange text-space px-5 py-4 mb-4 flex flex-wrap items-end justify-between gap-2">
+	<div>
+		<h1 class="font-bold text-xl tracking-[0.16em]">LOG FUEL</h1>
+		<p class="text-[11px] tracking-[0.14em] opacity-80 uppercase mt-0.5">{data.meal} · {data.d}</p>
+	</div>
+	<span class="lcars-code text-space/60">SBS 02-2261 · INTAKE</span>
 </header>
 
 {#if form?.error}
@@ -109,7 +112,7 @@
 				<span class="lcars-label">Amount (g)</span>
 				<input
 					name="qtyG" type="number" bind:value={qtyG} min="1" max="5000" required
-					class="bg-panel-2 rounded-xl px-4 py-3 w-32 font-mono outline-none focus:ring-2 focus:ring-orange"
+					class="lcars-input px-4 py-3 w-32 font-mono outline-none focus:ring-2 focus:ring-orange"
 				/>
 			</label>
 			{#each servings as s (s.label)}
@@ -120,7 +123,7 @@
 			<div class="flex-1"></div>
 			<div class="text-right">
 				{#if kcalPreview != null}
-					<p class="font-mono text-2xl tabular-nums">{kcalPreview} <span class="text-dim text-sm">kcal</span></p>
+					<p class="lcars-readout text-2xl">{kcalPreview} <span class="text-dim text-sm">kcal</span></p>
 				{/if}
 				<button type="submit" class="lcars-pill bg-orange text-space font-bold px-6 py-3 mt-1 hover:bg-amber transition-colors cursor-pointer">
 					Engage
@@ -138,7 +141,7 @@
 			bind:value={query}
 			oninput={onQueryInput}
 			placeholder="e.g. hummus, porridge oats…"
-			class="bg-panel-2 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-orange"
+			class="lcars-input px-4 py-3 outline-none focus:ring-2 focus:ring-orange"
 		/>
 	</label>
 	{#if searching}
@@ -192,12 +195,12 @@
 			<input type="hidden" name="d" value={data.d} />
 			<label class="flex flex-col gap-1 sm:col-span-2">
 				<span class="lcars-label">Name</span>
-				<input name="name" required class="bg-panel-2 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-orange" />
+				<input name="name" required class="lcars-input px-4 py-3 outline-none focus:ring-2 focus:ring-orange" />
 			</label>
 			{#each customFields as f (f.name)}
 				<label class="flex flex-col gap-1">
 					<span class="lcars-label">{f.label}</span>
-					<input name={f.name} type="number" step="0.1" min="0" required={f.required} class="bg-panel-2 rounded-xl px-4 py-3 font-mono outline-none focus:ring-2 focus:ring-orange" />
+					<input name={f.name} type="number" step="0.1" min="0" required={f.required} class="lcars-input px-4 py-3 font-mono outline-none focus:ring-2 focus:ring-orange" />
 				</label>
 			{/each}
 			<button type="submit" class="lcars-pill bg-orange text-space font-bold px-6 py-3 sm:col-span-2 hover:bg-amber transition-colors cursor-pointer">
