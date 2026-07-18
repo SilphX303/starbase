@@ -4,7 +4,7 @@
 
 	let { data }: { data: PageServerData } = $props();
 
-	// Life Support goes live in M5 (habits engine).
+	// All four ship systems online.
 	const systems = $derived([
 		{
 			name: 'Hull Integrity',
@@ -30,7 +30,7 @@
 		{
 			name: 'Life Support',
 			domain: 'Habits & recovery',
-			status: null,
+			status: data.lifeSupportStatus,
 			color: 'bg-teal',
 			href: '/life-support'
 		}
@@ -108,7 +108,7 @@
 <div class="lcars-panel mt-4 md:mt-6 p-5 border border-panel-2">
 	<p class="lcars-label mb-2">Ops log</p>
 	<p class="text-sm text-dim leading-relaxed">
-		Game systems online: XP, ranks, daily patrols and streak shields are operational — the MVP
-		loop is complete. Life Support (habits, hydration, sleep) arrives in the M5 refit.
+		All stations online: fuel logging, body telemetry, exercise, habits and the XP/mission
+		layer are operational. Weekly directives and story arcs arrive in the next refit.
 	</p>
 </div>

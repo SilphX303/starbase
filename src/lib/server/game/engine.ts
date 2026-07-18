@@ -1,6 +1,7 @@
 import { db, tables } from '$lib/server/db';
 import { and, eq, gte, lt, sql } from 'drizzle-orm';
 import { dayBounds, todayStr } from '$lib/server/food/log';
+import { habitsCompleted } from '$lib/server/habits';
 import type { UserSettings } from '$lib/server/settings';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -50,6 +51,7 @@ interface DayStats {
 	sessionXpRaw: number; // per-session 30–60, summed
 	steps: number | null;
 	stepTarget: number;
+	habitsDone: number;
 }
 
 async function dayStats(userId: number, d: string): Promise<DayStats> {
@@ -95,6 +97,7 @@ async function dayStats(userId: number, d: string): Promise<DayStats> {
 			: 7000;
 
 	return {
+		habitsDone: await habitsCompleted(userId, d),
 		mealEntries: food?.n ?? 0,
 		distinctMeals: food?.meals ?? 0,
 		kcal: Math.round(food?.kcal ?? 0),
@@ -204,7 +207,8 @@ export async function evaluateDay(userId: number, d: string, cfg: UserSettings):
 			s.distinctMeals >= 3 && s.kcal >= cfg.calorieFloor && s.kcal <= cfg.calorieTarget ? 40 : 0,
 		[`measurement:${d}`]: s.hasMeasurement ? 15 : 0,
 		[`exercise:${d}`]: Math.min(90, s.sessionXpRaw),
-		[`steps:${d}`]: s.steps !== null && s.steps >= s.stepTarget ? 25 : 0
+		[`steps:${d}`]: s.steps !== null && s.steps >= s.stepTarget ? 25 : 0,
+		[`habits:${d}`]: Math.min(5, s.habitsDone) * 10
 	};
 	// Enforce the ~300/day repeatable cap deterministically (clip in fixed key order).
 	let budget = REPEATABLE_DAY_CAP;

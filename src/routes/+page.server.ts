@@ -3,6 +3,7 @@ import { db } from '$lib/server/db';
 import { getSettings } from '$lib/server/settings';
 import { dayBounds, todayStr } from '$lib/server/food/log';
 import { hullStatus, propulsionStatus } from '$lib/server/body';
+import { lifeSupportStatus } from '$lib/server/habits';
 import { getGameState } from '$lib/server/game/engine';
 import type { PageServerLoad } from './$types';
 
@@ -21,9 +22,10 @@ export const load: PageServerLoad = async ({ locals }) => {
 			AND logged_at < ${Math.floor(end.getTime() / 1000)}
 	`);
 	const reactorStatus = Math.round(((row?.days ?? 0) / 7) * 100);
-	const [hull, propulsion, game] = await Promise.all([
+	const [hull, propulsion, lifeSupport, game] = await Promise.all([
 		hullStatus(user.id),
 		propulsionStatus(user.id),
+		lifeSupportStatus(user.id),
 		getGameState(user.id, settings)
 	]);
 
@@ -33,6 +35,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 		reactorStatus,
 		hullStatus: hull,
 		propulsionStatus: propulsion,
+		lifeSupportStatus: lifeSupport,
 		game
 	};
 };
