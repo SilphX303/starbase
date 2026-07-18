@@ -51,11 +51,17 @@ docker compose exec starbase node scripts/create-user.js steve@mcfly.uk 'new-pas
 
 ### Backups
 
-Nightly cron on the host, e.g.:
+`scripts/backup.js` performs an online SQLite backup to `/data/backups/` and keeps
+the newest 14. In production it runs nightly via a Coolify Scheduled Task
+(`node scripts/backup.js`, daily). Run manually any time:
 
 ```bash
-sqlite3 ./data/starbase.db ".backup ./backups/starbase-$(date +%F).db"
+docker compose exec starbase node scripts/backup.js
 ```
+
+Restore: stop the app, replace `/data/starbase.db` with a backup file, start the app.
+Backups live inside the `starbase-data` volume — for disaster-proofing, also copy the
+volume off-box (e.g. include the server's docker volumes path in your NAS backup job).
 
 ## Project layout
 
