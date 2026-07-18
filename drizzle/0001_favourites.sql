@@ -1,0 +1,1 @@
+ALTER TABLE `foods` ADD `favourite` integer DEFAULT false NOT NULL;

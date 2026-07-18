@@ -27,7 +27,8 @@ export const foods = sqliteTable('foods', {
 	fatG: real('fat_g'),
 	fibreG: real('fibre_g'),
 	servingSizesJson: text('serving_sizes_json'),
-	cachedAt: integer('cached_at', { mode: 'timestamp' })
+	cachedAt: integer('cached_at', { mode: 'timestamp' }),
+	favourite: integer('favourite', { mode: 'boolean' }).notNull().default(false)
 });
 
 export const foodLogs = sqliteTable('food_logs', {

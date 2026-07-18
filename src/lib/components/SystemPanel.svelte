@@ -28,7 +28,13 @@
 			<div class="h-full rounded-full {color}" style="width: {status ?? 0}%"></div>
 		</div>
 		<p class="text-dim text-xs mt-2 tracking-wider">
-			{status === null ? 'AWAITING SENSOR DATA' : 'NOMINAL'}
+			{status === null
+				? 'AWAITING SENSOR DATA'
+				: status >= 70
+					? 'NOMINAL'
+					: status >= 30
+						? 'DEGRADED'
+						: 'LOW POWER'}
 		</p>
 	</div>
 </a>

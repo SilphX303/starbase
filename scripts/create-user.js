@@ -6,6 +6,8 @@
  *   DATABASE_PATH=./data/starbase.db node scripts/create-user.js steve@example.com hunter2
  */
 import Database from 'better-sqlite3';
+import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
 import argon2 from 'argon2';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -21,23 +23,8 @@ fs.mkdirSync(path.dirname(dbPath), { recursive: true });
 const db = new Database(dbPath);
 db.pragma('journal_mode = WAL');
 
-// On a fresh DB (users table missing), apply committed migrations.
-const hasUsers = db
-	.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='users'")
-	.get();
-if (!hasUsers) {
-	const migrationsDir = './drizzle';
-	const journal = JSON.parse(
-		fs.readFileSync(path.join(migrationsDir, 'meta/_journal.json'), 'utf8')
-	);
-	for (const entry of journal.entries) {
-		const sql = fs.readFileSync(path.join(migrationsDir, `${entry.tag}.sql`), 'utf8');
-		for (const stmt of sql.split('--> statement-breakpoint')) {
-			if (stmt.trim()) db.exec(stmt);
-		}
-	}
-	console.log('Applied migrations to fresh database.');
-}
+// Same migrator the app uses at startup — idempotent, shared bookkeeping.
+migrate(drizzle(db), { migrationsFolder: './drizzle' });
 
 const hash = await argon2.hash(password, { type: argon2.argon2id });
 const existing = db.prepare('SELECT id FROM users WHERE email = ?').get(email);

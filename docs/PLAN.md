@@ -168,3 +168,36 @@ No food/drink burns visceral fat quickly; it responds to sustained deficit + act
 ---
 
 *Note: this is a self-tracking tool, not medical advice. Calorie/activity targets should be sanity-checked with Steve's GP or diabetes care team.*
+
+---
+
+## 11. Expansion Concept — "Life Operations" (post-MVP, v4+)
+
+**Status: banked 2026-07-18 — do not start until M2–M4 (health MVP) are confirmed in daily use.**
+
+The vision: expand from health tracker to a full *officer's life simulator* — diet, body, home, and life admin, all in service of one duty roster. Designed for ADHD/neurodivergent brains: the ship's computer externalises initiation, prioritisation, and task breakdown. "Your quarters require attention, Lieutenant" is a mission briefing, not a nag.
+
+### Domain mapping
+
+| Life domain | Ship metaphor | Examples |
+|---|---|---|
+| Body & health | The ship itself (existing 4 systems) | Already built: Hull, Reactor, Propulsion, Life Support |
+| House & chores | Station maintenance | Hull inspections (cleaning), waste extraction, replicator bay (kitchen) |
+| Finances | Quartermaster / supplies | Budget checks, bill payments as resupply missions |
+| Admin & paperwork | Bridge operations | Subspace correspondence (email), stardate logs (appointments) |
+| Learning & skills | Academy coursework | Study sessions, certifications as commendations |
+| Social connection | Diplomatic missions | Reach-outs, visits, events |
+
+One promotion track spans all domains — keeping yourself *and* your life running is the job of an officer.
+
+### Design principles (carry over, non-negotiable)
+
+- XP for actions, never outcomes; no punishment mechanics; streak shields, never streak loss.
+- Rest is duty: recovery days score full marks.
+- Architecture is already domain-agnostic: missions, habits, xp_events extend to new domains via new mission templates + dashboard panels, not schema rework.
+- **Configurable framing**: duty framing motivates many ND users but backfires for demand-avoidant (PDA) profiles. Setting: "orders from Command" vs "suggestions from the ship's computer".
+- Trademark discipline still applies (more so if ever shared): original naming only — "the Fleet", "Command", no actual Star Trek marks.
+
+### Phasing
+
+Only after MVP is confirmed in daily use: (1) house/chores domain first (closest to habits engine), (2) admin/paperwork, (3) finances, (4) learning + social. Each domain ships as mission templates + one panel, smallest possible increment.

@@ -11,7 +11,9 @@
 		{ href: '/reactor', label: 'Reactor Core', color: 'bg-orange' },
 		{ href: '/hull', label: 'Hull Integrity', color: 'bg-salmon' },
 		{ href: '/propulsion', label: 'Propulsion', color: 'bg-lavender' },
-		{ href: '/life-support', label: 'Life Support', color: 'bg-teal' }
+		{ href: '/life-support', label: 'Life Support', color: 'bg-teal' },
+		{ href: '/replicator', label: 'Replicator', color: 'bg-mauve' },
+		{ href: '/settings', label: 'Config', color: 'bg-glow' }
 	];
 
 	const isActive = (href: string) =>

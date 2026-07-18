@@ -30,6 +30,7 @@
 	},
 	"dependencies": {
 		"argon2": "^0.44.0",
+		"barcode-detector": "^3.2.1",
 		"better-sqlite3": "^12.11.1",
 		"drizzle-orm": "^0.45.2"
 	}
